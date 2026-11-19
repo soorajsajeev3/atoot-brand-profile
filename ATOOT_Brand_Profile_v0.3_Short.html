@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATOOT — Brand Profile (Concise Edition v0.3)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-stone: #F7F5F0;
+      --bg-card: #FFFFFF;
+      --bg-tint: #F1EFE9;
+      --coconut-brown: #4A3222;
+      --coconut-dark: #2F1F15;
+      --kerala-green: #1F4E3D;
+      --kerala-green-light: #E8F2EE;
+      --charcoal: #1E2422;
+      --muted: #5A6360;
+      --border: #E2DDD3;
+      --accent-amber: #B87333;
+      --accent-amber-bg: #FDF5EC;
+      --danger: #9B2C2C;
+      --danger-bg: #FDECEC;
+      --pass: #1E6B4B;
+      --pass-bg: #E6F4ED;
+      --sidebar-w: 268px;
+      --radius: 10px;
+      --shadow: 0 4px 18px rgba(30, 36, 34, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-stone);
+      color: var(--charcoal);
+      line-height: 1.62;
+      font-size: 14.5px;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--charcoal);
+      color: #E8E6E1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      padding: 22px 16px 36px;
+      z-index: 100;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.25s ease;
+    }
+
+    .sidebar-brand {
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .sidebar-brand .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #A7B5AF;
+      font-weight: 600;
+    }
+
+    .sidebar-brand h1 {
+      font-size: 24px;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .sidebar-brand p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      color: #D7C6B3;
+      margin-top: 2px;
+    }
+
+    .sidebar-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .nav-group-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #8E9C96;
+      margin: 16px 0 6px 10px;
+      font-weight: 700;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 6px 10px;
+      color: #D3D8D5;
+      text-decoration: none;
+      font-size: 12.8px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 2px;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: rgba(255,255,255,0.1);
+      color: #FFFFFF;
+    }
+
+    .sidebar nav a .num {
+      font-size: 11px;
+      font-weight: 700;
+      color: #C79A6B;
+      min-width: 24px;
+    }
+
+    /* Mobile Header */
+    .mobile-bar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 54px;
+      background: var(--charcoal);
+      color: #FFF;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 120;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .menu-btn {
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #FFF;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Main Content */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 32px 44px 72px;
+      max-width: 1140px;
+      width: 100%;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, var(--kerala-green) 0%, #15362A 58%, var(--coconut-dark) 100%);
+      color: #FFFFFF;
+      border-radius: 14px;
+      padding: 38px 40px 34px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(31, 78, 61, 0.18);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -55px;
+      top: -55px;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      border: 26px solid rgba(255,255,255,0.05);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #C7D9D1;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: 40px;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 26px;
+      font-style: italic;
+      color: #F2DFC6;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 14.5px;
+      color: #E3ECE8;
+      max-width: 720px;
+      margin-bottom: 20px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-chip {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #FFFFFF;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-print {
+      background: #FFFFFF;
+      color: var(--kerala-green);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .btn-print:hover {
+      background: #F2ECE4;
+      transform: translateY(-1px);
+    }
+
+    /* Section Cards */
+    section.doc-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 30px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 22px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid var(--bg-tint);
+    }
+
+    .section-num {
+      background: var(--kerala-green);
+      color: #FFFFFF;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .section-num.appendix {
+      background: var(--coconut-brown);
+    }
+
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--coconut-brown);
+      margin: 18px 0 10px;
+    }
+
+    p {
+      margin-bottom: 11px;
+      color: #2B3330;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* Key-Value List */
+    .kv-list {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .kv-item {
+      padding: 11px 15px;
+      background: var(--bg-stone);
+      border-left: 3px solid var(--kerala-green);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .kv-item strong {
+      color: var(--coconut-brown);
+      font-weight: 700;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      background: var(--kerala-green-light);
+      border-left: 4px solid var(--kerala-green);
+      padding: 16px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+    }
+
+    .callout.foundation {
+      background: #FAF8F4;
+      border: 1px solid #E5DEC9;
+      border-left: 4px solid var(--coconut-brown);
+    }
+
+    .callout.implication {
+      background: var(--accent-amber-bg);
+      border-left-color: var(--accent-amber);
+    }
+
+    .callout.implication .callout-title {
+      color: #8A4F16;
+    }
+
+    .callout-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--kerala-green);
+      margin-bottom: 6px;
+    }
+
+    .foundation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+
+    .foundation-card {
+      background: #FAF8F4;
+      border: 1px solid #E5DEC9;
+      border-top: 4px solid var(--coconut-brown);
+      border-radius: 8px;
+      padding: 15px 16px;
+    }
+
+    .foundation-card .f-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--coconut-brown);
+      margin-bottom: 6px;
+    }
+
+    .foundation-card .f-quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--coconut-dark);
+      line-height: 1.38;
+      margin-bottom: 6px;
+    }
+
+    .foundation-card p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* 5-Step Journey Strip */
+    .steps-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .step-pill {
+      background: var(--bg-stone);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--kerala-green);
+      border-radius: 8px;
+      padding: 12px 13px;
+    }
+
+    .step-pill span {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--kerala-green);
+      background: var(--kerala-green-light);
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-bottom: 5px;
+    }
+
+    .step-pill h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 14px 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: #FFFFFF;
+    }
+
+    thead th {
+      background: var(--charcoal);
+      color: #FFFFFF;
+      text-align: left;
+      padding: 10px 13px;
+      font-weight: 600;
+      font-size: 12.2px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 10px 13px;
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+      color: #2B3330;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #FAF9F6;
+    }
+
+    tbody td:first-child {
+      font-weight: 600;
+      color: var(--coconut-dark);
+      min-width: 150px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .badge-pending { background: var(--accent-amber-bg); color: #8A4F16; border: 1px solid #EBD0B3; }
+    .badge-critical { background: var(--danger-bg); color: var(--danger); border: 1px solid #F2BABA; }
+    .badge-high { background: #FFF4E5; color: #9A4D00; border: 1px solid #F5D0A9; }
+    .badge-pass { background: var(--pass-bg); color: var(--pass); border: 1px solid #B7E1CD; }
+    .badge-needs { background: var(--accent-amber-bg); color: #8A4F16; border: 1px solid #EBD0B3; }
+    .badge-dark { background: rgba(255,255,255,0.12); color: #E2E8F0; border: 1px solid rgba(255,255,255,0.2); }
+
+    /* Tagline Suite */
+    .tagline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin: 12px 0 14px;
+    }
+
+    .tagline-card {
+      background: var(--bg-stone);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .tagline-card .label {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .tagline-card .text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--kerala-green);
+    }
+
+    /* Review Summary Chips */
+    .review-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    footer.doc-footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12.5px;
+      padding: 18px 0 8px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .mobile-bar { display: flex; }
+      .sidebar {
+        transform: translateX(-100%);
+        top: 54px;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .main {
+        margin-left: 0;
+        padding: 72px 16px 56px;
+      }
+      .hero { padding: 26px 20px; }
+      .hero-title { font-size: 30px; }
+      .hero-tagline { font-size: 21px; }
+      section.doc-section { padding: 20px 16px; }
+    }
+
+    /* Print Styles */
+    @media print {
+      .sidebar, .mobile-bar, .btn-print { display: none !important; }
+      body { background: #FFFFFF; }
+      .main { margin-left: 0; padding: 0; max-width: 100%; }
+      .hero {
+        background: var(--kerala-green) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        page-break-after: avoid;
+      }
+      section.doc-section {
+        box-shadow: none;
+        border: 1px solid #DDD;
+        break-inside: avoid-page;
+      }
+      thead th {
+        background: #1E2422 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile Top Bar -->
+  <div class="mobile-bar">
+    <div><strong>ATOOT</strong> <span style="opacity:.7;font-size:12px;">Concise Profile v0.3</span></div>
+    <button class="menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰ Sections</button>
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="eyebrow">TRIKON Ecosystem • Concise Edition</div>
+      <h1>ATOOT</h1>
+      <p>Make Your Dream Product.</p>
+      <div class="sidebar-meta">
+        <span class="badge badge-dark">Draft v0.3</span>
+        <span class="badge badge-dark">19 Nov 2026</span>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-group-label">Control</div>
+      <a href="#control"><span class="num">00</span> Profile Control</a>
+
+      <div class="nav-group-label">Core Brand Profile</div>
+      <a href="#sec-01"><span class="num">01</span> Executive Brand Snapshot</a>
+      <a href="#sec-02"><span class="num">02</span> Identity &amp; Business Context</a>
+      <a href="#sec-03"><span class="num">03</span> Origin, Purpose &amp; Foundations</a>
+      <a href="#sec-04"><span class="num">04</span> Products, Services &amp; Offers</a>
+      <a href="#sec-05"><span class="num">05</span> Audience &amp; Customer Insight</a>
+      <a href="#sec-06"><span class="num">06</span> Market, Competitors &amp; Category</a>
+      <a href="#sec-07"><span class="num">07</span> Positioning &amp; Value Proposition</a>
+      <a href="#sec-08"><span class="num">08</span> Proof &amp; Trust</a>
+      <a href="#sec-09"><span class="num">09</span> Personality, Voice &amp; Language</a>
+      <a href="#sec-10"><span class="num">10</span> Narrative &amp; Messaging</a>
+      <a href="#sec-11"><span class="num">11</span> Brand Architecture &amp; Naming</a>
+      <a href="#sec-12"><span class="num">12</span> Visual Identity Direction</a>
+      <a href="#sec-13"><span class="num">13</span> Customer Experience &amp; Digital</a>
+      <a href="#sec-14"><span class="num">14</span> Ecosystem &amp; Team Handoff</a>
+      <a href="#sec-15"><span class="num">15</span> Priorities &amp; Measurement</a>
+
+      <div class="nav-group-label">Governance</div>
+      <a href="#app-ac"><span class="num">A–C</span> Sources, Gaps &amp; Review</a>
+    </nav>
+  </aside>
+
+  <!-- Main Document Body -->
+  <main class="main">
+
+    <!-- Hero Header -->
+    <header class="hero">
+      <div class="hero-eyebrow">TRIKON Ecosystem &nbsp;•&nbsp; Brand Profile (Concise Edition)</div>
+      <div class="hero-title">ATOOT</div>
+      <div class="hero-tagline">Make Your Dream Product.</div>
+      <p class="hero-subtitle">Innovation-Driven Coconut Manufacturing Platform &nbsp;|&nbsp; Kerala, India &nbsp;|&nbsp; v0.3 (19 Nov 2026)</p>
+      <div class="hero-meta">
+        <span class="hero-chip">Draft v0.3 (Concise)</span>
+        <span class="hero-chip">19 Nov 2026</span>
+        <span class="hero-chip">Internal Draft — Approval Pending</span>
+        <div class="hero-actions">
+          <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Control Record -->
+    <section id="control" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">00</span>
+        <h2>Profile Control</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">Control Field</th>
+              <th>Entry</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Brand &amp; Entity</td>
+              <td>ATOOT / Atoot [Client-stated: S01]. Legal entity, registration, and founders: Unknown.</td>
+            </tr>
+            <tr>
+              <td>Mode &amp; Stage</td>
+              <td>New brand foundation profile &nbsp;|&nbsp; <span class="badge badge-pending">Draft v0.3 (Concise)</span> &nbsp;|&nbsp; Approval: Pending (none recorded).</td>
+            </tr>
+            <tr>
+              <td>Geography &amp; Users</td>
+              <td>Base: Kerala, India; Target: Indian &amp; global investors and entrepreneurs [S01]. Users: Founders, design, web, content, sales, ops.</td>
+            </tr>
+            <tr>
+              <td>Scope &amp; Limits</td>
+              <td>Inspected: Client brief [S01] &amp; TRIKON Template v1.0 [S02]. Unperformed: Legal/IP check, facility audit, interviews, competitor audit.</td>
+            </tr>
+            <tr>
+              <td>Confidentiality &amp; File</td>
+              <td>Internal draft only. File: <code>ATOOT_Brand_Profile_v0.3_Short.docx</code> &nbsp;|&nbsp; Custodian: Pending &nbsp;|&nbsp; Next review: On receipt of P1 facts.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 01 -->
+    <section id="sec-01" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>Executive Brand Snapshot</h2>
+      </div>
+      <div class="kv-list">
+        <div class="kv-item"><strong>Summary:</strong> ATOOT is a Kerala-based coconut product development and manufacturing platform helping Indian and international entrepreneurs, innovators, and investors turn coconut by-product ideas into market-ready products [Client-stated: S01; Proposal; approval: Pending].</div>
+        <div class="kv-item"><strong>Positioning &amp; Value:</strong> Proposed: An Innovation-Driven Coconut Manufacturing Platform—not a conventional commodity factory—combining custom R&amp;D, manufacturing infrastructure, and investor collaboration across a 5-step journey from idea to market [S01; approval: Pending].</div>
+        <div class="kv-item"><strong>Character &amp; Proof:</strong> Traits: Innovative, Grounded, Progressive, Approachable, Trustworthy [S01]. Proof: None documented yet (all operational claims are Client-stated intent). Critical unknowns: Legal entity, commercial model (OEM vs. JV/equity), product categories, facility specs, certifications, and trademark clearance.</div>
+      </div>
+    </section>
+
+    <!-- Section 02 -->
+    <section id="sec-02" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Identity and Business Context</h2>
+      </div>
+      <div class="kv-list">
+        <div class="kv-item"><strong>Identity &amp; Location:</strong> Public name: ATOOT / Atoot [S01]. Base: Kerala, India; target reach: India &amp; global [S01]. Legal entity, exact plant address, domain, casing standard, and Malayalam spelling: Unknown.</div>
+        <div class="kv-item"><strong>Commercial Reality:</strong> Category: B2B coconut product development, custom manufacturing, and venture collaboration [S01]. Stage, revenue model (OEM vs. JV vs. facility lease), pricing/MOQs, and facility capacity: Unknown.</div>
+      </div>
+      <div class="callout implication">
+        <div class="callout-title">Implication</div>
+        <p>Clarify commercial model and facility ownership before investor outreach [Proposal].</p>
+      </div>
+    </section>
+
+    <!-- Section 03 -->
+    <section id="sec-03" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Origin, Purpose and Foundations</h2>
+      </div>
+      <p><strong>Meaning &amp; Origin:</strong> Brand Meaning [Client-stated: S01]: <em>'Atoot represents strength, continuity and an unbreakable connection between ideas, people and possibilities.'</em> Anchored in Kerala's coconut heritage; founding date and milestones: Unknown.</p>
+
+      <h3>Core Foundation Statements <span class="badge badge-pending">Client-stated verbatim [S01]; Lock: Pending</span></h3>
+      <div class="foundation-grid">
+        <div class="foundation-card">
+          <div class="f-label">Purpose</div>
+          <div class="f-quote">"Turning Nature's Resources into Tomorrow's Possibilities."</div>
+          <p>Unlocking untapped coconut by-products for modern markets.</p>
+        </div>
+        <div class="foundation-card">
+          <div class="f-label">Vision (Aspiration)</div>
+          <div class="f-quote">"To become a leading platform for coconut-based product innovation and manufacturing, transforming Kerala's rich coconut resources into global business opportunities."</div>
+        </div>
+        <div class="foundation-card">
+          <div class="f-label">Mission</div>
+          <div class="f-quote">"To empower individuals and businesses to turn their product ideas into reality through accessible, innovative and reliable coconut-based manufacturing solutions."</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Value [S01]</th>
+              <th>Core Meaning [S01]</th>
+              <th>Decision Rule (Proposed; Approval: Pending)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Innovation</td>
+              <td>Encouraging new ideas &amp; product possibilities.</td>
+              <td>Run feasibility checks on non-traditional by-product ideas before rejecting.</td>
+            </tr>
+            <tr>
+              <td>Sustainability</td>
+              <td>Better use of natural resources &amp; by-products.</td>
+              <td>Never claim environmental outcomes without measurable sourcing/process data.</td>
+            </tr>
+            <tr>
+              <td>Collaboration</td>
+              <td>Bringing investors, founders &amp; manufacturers together.</td>
+              <td>Define IP, roles, and commercial terms in writing before joint development.</td>
+            </tr>
+            <tr>
+              <td>Empowerment</td>
+              <td>Helping people turn ideas into businesses.</td>
+              <td>Explain technical, regulatory, and cost steps plainly without jargon.</td>
+            </tr>
+            <tr>
+              <td>Tradition</td>
+              <td>Preserving Kerala's coconut heritage modernly.</td>
+              <td>Modernise formats without severing authentic Kerala sourcing roots.</td>
+            </tr>
+            <tr>
+              <td>Reliability</td>
+              <td>Supporting clients across development &amp; production.</td>
+              <td>Never commit to timelines or capacities beyond verified operational limits.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 04 -->
+    <section id="sec-04" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>Products, Services and Offer Architecture</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Offer Pillar (Status: Unknown [S01])</th>
+              <th>Target Need &amp; Value</th>
+              <th>Key Unknowns to Resolve</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Coconut-Based Manufacturing</td>
+              <td>Develops &amp; manufactures modern products from coconut by-products in Kerala.</td>
+              <td>Product categories (food, coir, cosmetics), capacity, MOQs, certifications.</td>
+            </tr>
+            <tr>
+              <td>Custom Product Development</td>
+              <td>Turns entrepreneur concepts into tangible, market-ready physical products.</td>
+              <td>In-house R&amp;D vs. partner labs, prototyping timelines, IP rules, fees.</td>
+            </tr>
+            <tr>
+              <td>Manufacturing Infrastructure</td>
+              <td>Provides access to facilities, machinery, and production resources.</td>
+              <td>Owned vs. partner plant status, machinery list, compliance approvals.</td>
+            </tr>
+            <tr>
+              <td>Investor Collaboration</td>
+              <td>Welcomes Indian &amp; global investors to build manufacturing ventures in Kerala.</td>
+              <td>Legal structure (JV/equity/turnkey), ticket sizes, FDI compliance.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The Atoot Experience [S01]</h3>
+      <div class="steps-strip">
+        <div class="step-pill"><span>Step 01</span><h4>Bring Your Idea</h4></div>
+        <div class="step-pill"><span>Step 02</span><h4>Collaborate With Us</h4></div>
+        <div class="step-pill"><span>Step 03</span><h4>Develop Your Product</h4></div>
+        <div class="step-pill"><span>Step 04</span><h4>Manufacture in Kerala</h4></div>
+        <div class="step-pill"><span>Step 05</span><h4>Build Your Dream</h4></div>
+      </div>
+
+      <div class="callout implication">
+        <div class="callout-title">Implication</div>
+        <p>Attach real categories, MOQs, and owned-vs-partner boundaries to each stage [Proposal].</p>
+      </div>
+    </section>
+
+    <!-- Section 05 -->
+    <section id="sec-05" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>Audience and Customer Insight</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Segment (Hypotheses [S01])</th>
+              <th>Core Job to Be Done</th>
+              <th>Key Barriers &amp; Offer Fit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. Entrepreneurs &amp; Brand Founders (Primary)</td>
+              <td>Turn a modern coconut by-product concept into a market-ready product without building a factory from scratch.</td>
+              <td>Barriers: Factories refusing custom/small runs; opaque R&amp;D. Fit: Custom Development + Infrastructure (pending MOQs).</td>
+            </tr>
+            <tr>
+              <td>2. Indian &amp; Global Investors (Primary)</td>
+              <td>Deploy capital into sustainable Kerala manufacturing with a credible local execution partner.</td>
+              <td>Barriers: Unverified local claims, FDI/regulatory friction, unclear governance. Fit: Investor Collaboration (needs proof).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Boundary &amp; Implication:</strong> Local Kerala farmers/communities are ecosystem beneficiaries, not primary buyers [S01]. Poor fit: Pure low-margin bulk commodity buyers. Implication: Create two distinct web/sales tracks—For Entrepreneurs and For Investors [Proposal].</p>
+    </section>
+
+    <!-- Section 06 -->
+    <section id="sec-06" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Market, Competitors and Category</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Alternative Type [Inference]</th>
+              <th>Typical Offering</th>
+              <th>Implication for ATOOT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Conventional Kerala coconut processors (Direct)</td>
+              <td>Bulk legacy commodities (oil, coir, desiccated coconut); rigid on custom R&amp;D.</td>
+              <td>ATOOT's custom 'idea-to-product platform' [S01] is a strong candidate differentiator.</td>
+            </tr>
+            <tr>
+              <td>Turnkey agro consultants &amp; boards (Indirect)</td>
+              <td>DPRs, subsidies, and licensing advice; rarely execute production.</td>
+              <td>ATOOT bridges advisory-to-execution if facilities are operationally verified.</td>
+            </tr>
+            <tr>
+              <td>Independent DIY plant setup (Substitute)</td>
+              <td>Full control, but high upfront capex and slow local execution.</td>
+              <td>ATOOT must prove faster time-to-market and lower capex risk.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Research Gap:</strong> No named competitor audit or market sizing conducted yet. Conduct a 3–5 named Kerala/South India competitor benchmark before publishing comparative claims [Proposal].</p>
+    </section>
+
+    <!-- Section 07 -->
+    <section id="sec-07" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>Positioning and Value Proposition</h2>
+      </div>
+      <div class="callout">
+        <div class="callout-title">Proposed Positioning [Client-stated direction: S01; Approval: Pending]</div>
+        <p><strong>Positioning:</strong> For Indian and international entrepreneurs and investors seeking modern coconut-based ventures, ATOOT is an Innovation-Driven Coconut Manufacturing Platform in Kerala that turns untapped coconut by-products into market-ready businesses through custom development, manufacturing infrastructure, and collaborative support (operational proof pending).</p>
+        <p><strong>USP Outcome:</strong> Candidate to validate. Avoid present-tense superlatives ('leading,' 'first,' 'best') in marketing copy; keep 'leading' strictly inside the aspirational Vision statement.</p>
+      </div>
+    </section>
+
+    <!-- Section 08 -->
+    <section id="sec-08" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2>Proof and Trust</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Claim ID &amp; Summary [S01]</th>
+              <th>Evidence &amp; Safe Interim Wording</th>
+              <th>Verification Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>[C01] Provides facilities, machinery &amp; resources</td>
+              <td>Client-stated. Hold specific machinery/capacity promises until verified.</td>
+              <td>Document plant address, ownership &amp; machinery.</td>
+            </tr>
+            <tr>
+              <td>[C02] Custom R&amp;D &amp; technical support</td>
+              <td>Client-stated. Frame as service focus once categories/R&amp;D are confirmed.</td>
+              <td>Document R&amp;D team, process &amp; prototypes.</td>
+            </tr>
+            <tr>
+              <td>[C03] Global &amp; Indian investor collaboration</td>
+              <td>Client-stated. Safe as an invitation; do not imply existing global portfolio.</td>
+              <td>Define legal/JV models &amp; FDI readiness.</td>
+            </tr>
+            <tr>
+              <td>[C04] Sustainable impact for farmers/nature</td>
+              <td>Client-stated aspiration. Keep in Vision/Purpose; no quantified eco claims.</td>
+              <td>Track sourcing/waste data if used publicly.</td>
+            </tr>
+            <tr>
+              <td>[C05] 'Leading platform...' (Vision)</td>
+              <td>Aspiration only. Always retain 'To become a leading platform...'</td>
+              <td>Prohibit present-tense 'leading' claims.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Priority Proof Pack:</strong> Assemble corporate registration, leadership bios, real facility/prototype photos, and certifications (FSSAI, ISO, Coir Board, IEC) before paid investor outreach [Proposal].</p>
+    </section>
+
+    <!-- Section 09 -->
+    <section id="sec-09" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2>Personality, Voice and Language</h2>
+      </div>
+      <p><strong>Traits [S01] &amp; Voice [Proposal]:</strong> Innovative, Grounded, Progressive, Approachable, Trustworthy. Voice: Experienced, forward-thinking Kerala manufacturing partner speaking peer-to-peer—welcoming to builders, yet crisp and data-led for international investors.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 18%;">Context</th>
+              <th>Use This Approach (Proposed)</th>
+              <th>Avoid (Proposed)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Website</td>
+              <td>"Bring your idea to Kerala. Turn coconut by-products into modern, manufacturable products."</td>
+              <td>"World's #1 coconut empire—invest for effortless global returns!"</td>
+            </tr>
+            <tr>
+              <td>Sales / Pitch</td>
+              <td>"Let's review your product category, compliance needs, and best collaboration model."</td>
+              <td>"Don't worry about regulations—just sign on and we'll handle it overnight."</td>
+            </tr>
+            <tr>
+              <td>Support</td>
+              <td>"Batch 2 passed texture tests; refining shelf-life parameters, samples due Thursday."</td>
+              <td>"Manufacturing always has delays; we'll update you later."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Language &amp; Casing:</strong> Primary: Clean international Indian English; confirm 'ATOOT' vs. 'Atoot' casing and Malayalam script rules [Decision pending].</p>
+    </section>
+
+    <!-- Section 10 -->
+    <section id="sec-10" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <h2>Narrative and Messaging</h2>
+      </div>
+      <div class="kv-list">
+        <div class="kv-item"><strong>4 Message Pillars [S01; Proposal]:</strong> (1) Platform Over Factory — where ideas meet manufacturing; (2) Untapped Coconut Potential — modern products beyond legacy commodities; (3) End-to-End Kerala Infrastructure — concept to production support; (4) Global Collaboration — connecting investors, founders, and manufacturers.</div>
+        <div class="kv-item"><strong>Short About (66 words; Proposal):</strong> ATOOT is an innovation-driven coconut product development and manufacturing platform in Kerala, India. Dedicated to turning nature's resources into tomorrow's possibilities, ATOOT empowers Indian and international entrepreneurs, innovators, and investors to transform versatile coconut by-products into modern, market-ready products. Moving beyond conventional commodity factories, ATOOT combines custom product development, manufacturing infrastructure, and collaborative support—bridging Kerala's coconut heritage with modern technology from concept to commercial production [S01].</div>
+      </div>
+
+      <h3>Tagline Suite <span class="badge badge-pending">Client-stated: S01; Lock: Pending</span></h3>
+      <div class="tagline-grid">
+        <div class="tagline-card">
+          <div class="label">Primary Tagline</div>
+          <div class="text">ATOOT — Make Your Dream Product.</div>
+        </div>
+        <div class="tagline-card">
+          <div class="label">Sub-line</div>
+          <div class="text">From an idea to a product. From Kerala to the world.</div>
+        </div>
+        <div class="tagline-card">
+          <div class="label">Hero Headline</div>
+          <div class="text">Your Idea. Your Product. Your Manufacturing Journey.</div>
+        </div>
+        <div class="tagline-card">
+          <div class="label">Supporting</div>
+          <div class="text">Where Ideas Become Products; From Coconut to Creation; Innovate. Manufacture. Grow.</div>
+        </div>
+      </div>
+      <p><strong>Primary CTA [Proposal]:</strong> Dual CTA: <em>'Start Your Product Journey'</em> (Entrepreneurs) and <em>'Explore Investor Collaboration'</em> (Investors).</p>
+    </section>
+
+    <!-- Section 11 -->
+    <section id="sec-11" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">11</span>
+        <h2>Brand Architecture and Naming</h2>
+      </div>
+      <div class="kv-list">
+        <div class="kv-item"><strong>Structure:</strong> Single master brand (ATOOT) operating four B2B pillars [S01]. Parent legal entity, client co-branding/IP policy, and owned-vs-partner factory relationships: Unknown.</div>
+        <div class="kv-item"><strong>Non-Affiliated Clippings &amp; Clearance:</strong> External names pasted in [S01] (Alfa Smart Enterprises, Butler Technologies, Alberta.ca, M2Balu Export) are excluded as unverified references—never cite as partners. Domain and trademark clearance for 'ATOOT' and tagline: Not performed (required before launch).</div>
+      </div>
+    </section>
+
+    <!-- Section 12 -->
+    <section id="sec-12" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">12</span>
+        <h2>Visual Identity Direction</h2>
+      </div>
+      <p><strong>Existing Assets:</strong> None supplied (logo, palette, typography, and photography are Unknown / Pending design).</p>
+      <div class="callout">
+        <div class="callout-title">Proposed Direction [Approval: Pending]</div>
+        <p><strong>Perception:</strong> Investment-grade modern manufacturing rooted in Kerala's natural abundance.</p>
+        <p><strong>Logo:</strong> Geometric continuity reflecting 'unbreakable connection'—avoid cartoon coconuts/palms.</p>
+        <p><strong>Palette:</strong> Deep Kerala forest green, coconut-husk brown, warm stone, architectural charcoal.</p>
+        <p><strong>Type:</strong> Clean geometric sans-serif + optional editorial serif.</p>
+        <p><strong>Imagery:</strong> Authentic Kerala facility, raw by-product textures, R&amp;D prototyping, and modern finished goods.</p>
+        <p><strong>Priority deliverables:</strong> Website, company profile, investor deck, sample packaging.</p>
+      </div>
+    </section>
+
+    <!-- Section 13 -->
+    <section id="sec-13" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">13</span>
+        <h2>Customer Experience and Digital Implications</h2>
+      </div>
+      <div class="kv-list">
+        <div class="kv-item"><strong>Digital Journey (Mapped to 5-Step Experience [Proposal]):</strong> (1) Discovery: Dual-track homepage (Entrepreneurs vs. Investors) + NDA-ready intake form; (2) Evaluation: Downloadable capability/investor deck + discovery call booking; (3) Development: Stage-gate R&amp;D milestones; (4) Manufacturing: QA updates &amp; Kerala facility visits; (5) Scale: Re-order support &amp; permission-based case studies.</div>
+        <div class="kv-item"><strong>Gaps:</strong> No live website, domain, CRM, or baseline analytics inspected. Prioritise a proof-backed corporate site and investor deck before paid outreach.</div>
+      </div>
+    </section>
+
+    <!-- Section 14 -->
+    <section id="sec-14" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">14</span>
+        <h2>Ecosystem and Team Handoff</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Immediate Requirement</th>
+              <th>Dependency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Design &amp; Web</td>
+              <td>Build visual identity, investor deck &amp; dual-track site around the 5-step Experience.</td>
+              <td>P1 facts + P2 trademark lock.</td>
+            </tr>
+            <tr>
+              <td>Content &amp; Sales</td>
+              <td>Draft copy/pitches using Section 09 voice &amp; separate Entrepreneur/Investor scripts.</td>
+              <td>Section 08 Proof Pack + legal terms.</td>
+            </tr>
+            <tr>
+              <td>Ops &amp; Brand Mgmt</td>
+              <td>Document R&amp;D/QA SOPs, facility capacity &amp; maintain v0.3 master profile.</td>
+              <td>Founder / Operations lead.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <div class="callout-title">Compact AI / Team Handoff</div>
+        <p><strong>Identity:</strong> ATOOT (Kerala; legal entity Pending). <strong>Verbatim lines:</strong> Make Your Dream Product; Turning Nature's Resources into Tomorrow's Possibilities [S01]. <strong>Prohibited:</strong> ROI guarantees, present-tense 'leading/first', unverified eco/export certs, clipped third-party names. <strong>Master:</strong> v0.3 (19 Nov 2026); Approval: Pending.</p>
+      </div>
+    </section>
+
+    <!-- Section 15 -->
+    <section id="sec-15" class="doc-section">
+      <div class="section-header">
+        <span class="section-num">15</span>
+        <h2>Priorities and Measurement</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Priority</th>
+              <th>Action</th>
+              <th>Owner &amp; Measure (Proposed)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P1 (Immediate)</td>
+              <td>Document legal entity, commercial model (OEM vs. JV), product categories &amp; facility specs.</td>
+              <td>Founder &nbsp;|&nbsp; 100% factual intake completed before web/deck build.</td>
+            </tr>
+            <tr>
+              <td>P2 (Pre-Design)</td>
+              <td>Run trademark/domain clearance; lock casing, Vision, Mission, Values &amp; Platform positioning.</td>
+              <td>Founder + Legal &nbsp;|&nbsp; Clearance memo + signed Appendix B approval.</td>
+            </tr>
+            <tr>
+              <td>P3 (Pre-Launch)</td>
+              <td>Build Proof Pack (bios, facility photos, certifications) &amp; 3–5 Kerala competitor benchmark.</td>
+              <td>Strategy + Ops &nbsp;|&nbsp; &ge;3 verified proof records + competitor table.</td>
+            </tr>
+            <tr>
+              <td>P4 (Launch)</td>
+              <td>Execute visual identity, Investor Deck, Company Profile &amp; dual-track Website.</td>
+              <td>Design/Web &nbsp;|&nbsp; Monthly qualified consultation rate (CRM tracked).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Appendices A–C -->
+    <section id="app-ac" class="doc-section">
+      <div class="section-header">
+        <span class="section-num appendix">App A–C</span>
+        <h2>Sources, Gaps, Approvals &amp; Review</h2>
+      </div>
+      <p><strong>Appendix A — Sources:</strong> [S01] Client-Supplied ATOOT Brand Foundation &amp; Direction Brief (full prompt, 19 Nov 2026; establishes client intent only; third-party web captions excluded). [S02] TRIKON Brand Profile Master Template v1.0 (19 Nov 2026; governance format only). Claims C01–C05 are logged in Section 08.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 15%;">Priority</th>
+              <th>Appendix B — Key Gaps &amp; Conflicts</th>
+              <th>Interim Treatment &amp; Resolver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-critical">Critical</span></td>
+              <td>Legal entity, Kerala location, commercial model (OEM vs. JV/equity) Unknown.</td>
+              <td>Hold external deck/site &nbsp;|&nbsp; Founder.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-critical">Critical</span></td>
+              <td>Facility ownership, machinery, product categories, MOQs &amp; certifications Unknown.</td>
+              <td>Qualify as intent only &nbsp;|&nbsp; Ops/Founder.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-high">High</span></td>
+              <td>Trademark/domain clearance, casing ('ATOOT' vs 'Atoot') &amp; unvalidated audiences.</td>
+              <td>Run IP check; label hypotheses &nbsp;|&nbsp; Founder/Strategy.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-high">High</span></td>
+              <td>Third-party clippings in [S01] (Alfa Smart, Butler Tech, Alberta.ca, M2Balu).</td>
+              <td>Excluded from brand facts &nbsp;|&nbsp; Confirm with Owner.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Approval &amp; Version Record:</strong> v0.1 (partial brief) &amp; v0.2 (full long-form draft) &rarr; v0.3 Concise Edition (19 Nov 2026, shortened for quick executive/team review). Formal Approvals: None recorded (all Pending). Custodian: Pending.</p>
+
+      <div class="callout foundation" style="margin-top: 16px;">
+        <div class="callout-title">Appendix C — Review Check (19 Nov 2026)</div>
+        <div class="review-bar" style="margin-bottom: 10px;">
+          <span class="badge badge-pass">Pass (10/12)</span>
+          <span class="badge badge-needs">Needs Work (2/12)</span>
+        </div>
+        <p><strong>Pass (10/12):</strong> Distinction of plans vs. reality, sourced claims, disclosed limits, audience hypotheses, USP discipline, consistency, preserved wording, visible proposals, governance tags, all 15 headings intact.</p>
+        <p><strong>Needs work (2/12):</strong> Legal/entity facts (#1) and operational proof (#6) — both logged as P1/P3 blockers.</p>
+      </div>
+    </section>
+
+    <footer class="doc-footer">
+      TRIKON Ecosystem &bull; ATOOT Brand Profile (Concise Edition v0.3) &bull; 19 November 2026 &bull; Internal Working Draft
+    </footer>
+  </main>
+
+  <script>
+    // Close mobile sidebar on link click
+    document.querySelectorAll('.sidebar nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.sidebar').classList.remove('open');
+      });
+    });
+
+    // Highlight active section in sidebar while scrolling
+    const sections = document.querySelectorAll('section.doc-section');
+    const navLinks = document.querySelectorAll('.sidebar nav a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const active = document.querySelector(`.sidebar nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
